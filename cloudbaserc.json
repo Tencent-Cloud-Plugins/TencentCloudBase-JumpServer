@@ -1,0 +1,61 @@
+{
+  "version": "2.0",
+  "envId": "{{env.ENV_ID}}",
+  "framework": {
+    "name": "JumpServer",
+    "plugins": {
+      "client": {
+        "use": "@cloudbase/framework-plugin-container",
+        "inputs": {
+          "serviceName": "JumpServer",
+          "servicePath": "/",
+          "uploadType": "image",
+          "imageInfo": {
+            "imageUrl": "ccr.ccs.tencentyun.com/tcbimages/jumpserver-tcb:2.8.3"
+          },
+          "containerPort": 80,
+          "envVariables": {
+            "CMD_DB_URL": "mysql://root:{{env.MYSQL_PASSWORD}}@{{env.MYSQL_DB_IP}}:{{env.MYSQL_DB_PORT}}/jumpserver",
+            "CMD_DB_HOST": "{{env.MYSQL_DB_IP}}",
+            "CMD_DB_PORT": "{{env.MYSQL_DB_PORT}}",
+            "CMD_DB_NAME": "jumpserver",
+            "CMD_DB_USERNAME": "root",
+            "DB_NAME": "jumpserver",
+            "CMD_DB_PASSWORD": "{{env.MYSQL_PASSWORD}}"
+          },
+          "volumeMounts": {
+            "/opt/jumpserver/data": "jumpserver-data",
+            "/opt/koko/data": "koko-data",
+            "/config/guacamole/data": "guacamole-data"
+          }
+        }
+      }
+    },
+    "requirement": {
+      "addons": [
+        {
+          "type": "CFS",
+          "name": "jumpserver-data"
+        },
+        {
+          "type": "CFS",
+          "name": "koko-data"
+        },
+        {
+          "type": "CFS",
+          "name": "guacamole-data"
+        },
+        {
+          "type": "CynosDB",
+          "name": "jumpserver",
+          "envMap": {
+            "IP": "MYSQL_DB_IP",
+            "PORT": "MYSQL_DB_PORT",
+            "USERNAME": "MYSQL_USERNAME",
+            "PASSWORD": "MYSQL_PASSWORD"
+          }
+        }
+      ]
+    }
+  }
+}
