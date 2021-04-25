@@ -11,7 +11,7 @@
           "servicePath": "/",
           "uploadType": "image",
           "imageInfo": {
-            "imageUrl": "ccr.ccs.tencentyun.com/tcbimages/jumpserver-tcb:2.8.3"
+            "imageUrl": "ccr.ccs.tencentyun.com/tcbimages/jumpserver-tcb:2.8.4"
           },
           "containerPort": 80,
           "envVariables": {
