@@ -8,6 +8,8 @@
         "use": "@cloudbase/framework-plugin-container",
         "inputs": {
           "serviceName": "jumpserver",
+          "cpu": 2,
+          "mem": 4,
           "servicePath": "/",
           "uploadType": "image",
           "imageInfo": {
